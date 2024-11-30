@@ -11,9 +11,15 @@ public enum TransitionPanels
 
 public class SceneTransition : MonoBehaviour
 {
-	[SerializeField] private SceneTransitionPanel[] panels;
+    private const string trigger_fadein = "fade_in";
+    private const string trigger_fadeout = "fade_out";
+    private const string anim_fadevisible = "scene_transition_fade_visible";
+    [SerializeField] private SceneTransitionPanel[] panels;
 
 	private Animator animator;
+	private WaitForSeconds delayFade = new WaitForSeconds(0.1f);
+
+	public static event Action<string> OnChangedScene;
 
     public static SceneTransition Instance { get; private set; }
 
@@ -21,12 +27,12 @@ public class SceneTransition : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
 
         Instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
 		
 		animator = GetComponent<Animator>();
 	}
@@ -41,13 +47,14 @@ public class SceneTransition : MonoBehaviour
 		HideAllPanels();
 		ShowPanel(transitionName);
 		
-		animator.SetTrigger("fade_in");
+		animator.SetTrigger(trigger_fadein);
 
-		while(!animator.GetCurrentAnimatorStateInfo(0).IsName("scene_transition_fade_visible"))
-			yield return new WaitForSeconds(0.1f);
+		while(!animator.GetCurrentAnimatorStateInfo(0).IsName(anim_fadevisible))
+			yield return delayFade;
 		
-		LevelManager.Instance.LoadScene(sceneName);
-		animator.SetTrigger("fade_out");
+
+		OnChangedScene?.Invoke(sceneName);
+		animator.SetTrigger(trigger_fadeout);
 	}
 
 	private void HideAllPanels()
