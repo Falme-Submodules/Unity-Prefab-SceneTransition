@@ -104,7 +104,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 247
+    m_Bits: 55
 --- !u!114 &8840807306733158851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 783685406798189472}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d5201de5cc4134db158ec6fc487bc4, type: 3}
+  m_Script: {fileID: 11500000, guid: e6e9e732ab65688b8ae930665c9b1545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   panels:
@@ -142,7 +142,7 @@ Animator:
   m_GameObject: {fileID: 783685406798189472}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 17405c069c4b95f4188fb45e01e27a6d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 717bffbe88607500d83ec940ea44808d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
