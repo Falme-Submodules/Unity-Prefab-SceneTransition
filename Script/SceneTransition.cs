@@ -19,8 +19,6 @@ public class SceneTransition : MonoBehaviour
 	private Animator animator;
 	private WaitForSeconds delayFade = new WaitForSeconds(0.1f);
 
-	public static event Action<string> OnChangedScene;
-
     public static SceneTransition Instance { get; private set; }
 
     private void Awake()
@@ -53,7 +51,7 @@ public class SceneTransition : MonoBehaviour
 			yield return delayFade;
 		
 
-		OnChangedScene?.Invoke(sceneName);
+		LevelManager.Instance.LoadScene(sceneName);
 		animator.SetTrigger(trigger_fadeout);
 	}
 
