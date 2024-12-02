@@ -9,7 +9,7 @@ public enum TransitionPanels
 	WHITE = 1,
 }
 
-public class SceneTransition : MonoBehaviour
+public class SceneTransition : GenericSingleton<SceneTransition>
 {
     private const string trigger_fadein = "fade_in";
     private const string trigger_fadeout = "fade_out";
@@ -19,20 +19,9 @@ public class SceneTransition : MonoBehaviour
 	private Animator animator;
 	private WaitForSeconds delayFade = new WaitForSeconds(0.1f);
 
-    public static SceneTransition Instance { get; private set; }
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-		
-		animator = GetComponent<Animator>();
+	private void Start() 
+	{
+		animator = GetComponent<Animator>();		
 	}
 
 	public void ChangeSceneTransition(TransitionPanels transitionName, string sceneName)
